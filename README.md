@@ -58,7 +58,8 @@ filebeat.yml:
       pretty: false
 
 
-For java, add logback.xml in resource folder
+## Java
+ add logback.xml in resource folder
 
 <configuration>
 
@@ -90,3 +91,31 @@ For java, add logback.xml in resource folder
     </root>
 
 </configuration>
+
+Add dependencies:
+       <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>2.0.13</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jul-to-slf4j</artifactId>
+            <version>2.0.17</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.logstash.logback</groupId>
+            <artifactId>logstash-logback-encoder</artifactId>
+            <version>7.4</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+            <version>3.1.2</version>
+            <scope>compile</scope>
+        </dependency>
+
+
