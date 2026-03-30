@@ -93,11 +93,7 @@ filebeat.yml:
 </configuration>
 
 Add dependencies:
-       <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>2.0.13</version>
-        </dependency>
+       
 
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -116,6 +112,12 @@ Add dependencies:
             <artifactId>spring-kafka</artifactId>
             <version>3.1.2</version>
             <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>2.0.13</version>
         </dependency>
 
 
