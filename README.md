@@ -64,7 +64,7 @@ filebeat.yml:
 <configuration>
 
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>D:/logs/car-catalog/app.log(your file name) </file>
+        <file>D:/logs/car-catalog(your folder name)/app.log </file>
 
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>D:/logs/car-catalog(your file name)/app-%d{yyyy-MM-dd}.log</fileNamePattern>
