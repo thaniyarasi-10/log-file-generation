@@ -50,6 +50,7 @@ filebeat.yml:
       
 
   // do not change output
+  
   output.kafka:
   
     hosts: ["172.16.30.10:9092"]
@@ -81,7 +82,15 @@ filebeat.yml:
 
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d{HH:mm:ss} [%level] %logger - %msg%n</pattern>
+            <pattern>
+                {
+                "timestamp":"%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX}",
+                "level":"%level",
+                "message":"%msg",
+                "service":"car-catalog",
+                "environment":"production"
+                }
+            </pattern>
         </encoder>
     </appender>
 
@@ -120,4 +129,28 @@ Add dependencies:
             <version>2.0.13</version>
         </dependency>
 
+Add interceptor 
+
+  import jakarta.servlet.http.HttpServletRequest;
+  import jakarta.servlet.http.HttpServletResponse;
+  import org.springframework.web.servlet.HandlerInterceptor;
+  import org.slf4j.Logger;
+  import org.slf4j.LoggerFactory;
+  
+  public class LogInterceptor implements HandlerInterceptor {
+  
+      private static final Logger log = LoggerFactory.getLogger(LogInterceptor.class);
+  
+      @Override
+      public boolean preHandle(HttpServletRequest req, HttpServletResponse res, Object handler) {
+          req.setAttribute("start", System.currentTimeMillis());
+          return true;
+      }
+  
+      @Override
+      public void afterCompletion(HttpServletRequest req, HttpServletResponse res, Object handler, Exception ex) {
+          long time = System.currentTimeMillis() - (long) req.getAttribute("start");
+          log.info("endpoint={} responseTime={}ms", req.getRequestURI(), time);
+      }
+  }
 
